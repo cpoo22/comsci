@@ -1,0 +1,37 @@
+- title "Customers"
+
+%table
+  %tr
+    %th Title
+    %th First name
+    %th Last name
+    %th Address line 1
+    %th Address line 2
+    %th Address line 3
+    %th Town
+    %th County
+    %th Country
+    %th Postcode
+    %th Telephone number
+    %th Mobile number
+    %th Email
+  - for customer in @customers
+    %tr
+      %td= customer.title
+      %td= customer.first_name
+      %td= customer.last_name
+      %td= customer.address_line_1
+      %td= customer.address_line_2
+      %td= customer.address_line_3
+      %td= customer.town
+      %td= customer.county
+      %td= customer.country
+      %td= customer.postcode
+      %td= customer.telephone_number
+      %td= customer.mobile_number
+      %td= customer.email
+      %td= link_to 'Show', customer
+      %td= link_to 'Edit', edit_customer_path(customer)
+      %td= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Customer", new_customer_path

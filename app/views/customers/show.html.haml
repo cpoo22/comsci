@@ -1,0 +1,48 @@
+- title "Customer"
+
+%p
+  %strong Title:
+  = @customer.title
+%p
+  %strong First Name:
+  = @customer.first_name
+%p
+  %strong Last Name:
+  = @customer.last_name
+%p
+  %strong Address Line 1:
+  = @customer.address_line_1
+%p
+  %strong Address Line 2:
+  = @customer.address_line_2
+%p
+  %strong Address Line 3:
+  = @customer.address_line_3
+%p
+  %strong Town:
+  = @customer.town
+%p
+  %strong County:
+  = @customer.county
+%p
+  %strong Country:
+  = @customer.country
+%p
+  %strong Postcode:
+  = @customer.postcode
+%p
+  %strong Telephone Number:
+  = @customer.telephone_number
+%p
+  %strong Mobile Number:
+  = @customer.mobile_number
+%p
+  %strong Email:
+  = @customer.email
+
+%p
+  = link_to "Edit", edit_customer_path(@customer)
+  |
+  = link_to "Destroy", @customer, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", customers_path
