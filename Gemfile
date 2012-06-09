@@ -21,7 +21,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'debugger'
   gem 'nifty-generators'
   gem 'autotest-growl'
   gem 'autotest-fsevent'
