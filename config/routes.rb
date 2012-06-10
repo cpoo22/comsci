@@ -1,5 +1,5 @@
 Comsci::Application.routes.draw do
-  resources :products, :customers
+  resources :products, :customers, :orders
 
 
   # The priority is based upon order of creation:
