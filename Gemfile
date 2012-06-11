@@ -26,6 +26,7 @@ group :development, :test do
   gem 'autotest-fsevent'
   gem 'ZenTest', '~> 4.5'
   gem "autotest-rails", "~> 4.1.0"
+  gem 'nested_scaffold'
 end
 
 group :test do
@@ -33,8 +34,8 @@ group :test do
 end
 
 
-# Use unicorn as the app server
-# gem 'unicorn'
+#Use unicorn as the app server
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'

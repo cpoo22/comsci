@@ -1,5 +1,5 @@
-- title "New Order"
+%h1 New order
 
 = render 'form'
 
-%p= link_to "Back to List", orders_path
+= link_to 'Back', customer_orders_path(@order.customer)

@@ -1,12 +1,18 @@
-- title "Order"
+%p#notice= notice
 
 %p
-  %strong Total Price:
+  %b Total price:
   = @order.total_price
-
 %p
-  = link_to "Edit", edit_order_path(@order)
-  |
-  = link_to "Destroy", @order, :confirm => 'Are you sure?', :method => :delete
-  |
-  = link_to "View All", orders_path
+  %b Discount:
+  = @order.discount
+%p
+  %b Order date:
+  = @order.order_date
+%p
+  %b Total weight:
+  = @order.total_weight
+
+= link_to 'Edit', edit_customer_order_path(@order.customer, @order)
+\|
+= link_to 'Back', customer_orders_path(@order.customer)

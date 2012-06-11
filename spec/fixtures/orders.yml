@@ -1,11 +1,14 @@
 one:
+  id: 1
   total_price: 1.5
-  discount: 1.5
-  order_date: Date.new
   total_weight: 1
+  order_date: Time.now
+  discount: 1.5
+  customer_id: 1
 
 two:
-  total_price: 1.5
-  discount: 1.5
-  order_date: Date.new
-  total_weight: 1
+  total_price: 2.5
+  total_weight: 2
+  order_date: Time.now
+  discount: 2.5
+  customer_id: 2

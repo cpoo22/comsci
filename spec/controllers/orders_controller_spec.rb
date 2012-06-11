@@ -5,53 +5,52 @@ describe OrdersController do
   render_views
 
   it "index action should render index template" do
-    get :index
+    get :index, :customer_id => 1
     response.should render_template(:index)
   end
 
   it "show action should render show template" do
-    get :show, :id => Order.first
+    get :show, :id => 1, :customer_id => 1
     response.should render_template(:show)
   end
 
   it "new action should render new template" do
-    get :new
+    get :new, :customer_id => 1
     response.should render_template(:new)
   end
 
   it "create action should render new template when model is invalid" do
     Order.any_instance.stubs(:valid?).returns(false)
-    post :create
+    post :create, :customer_id => 1
     response.should render_template(:new)
   end
 
   it "create action should redirect when model is valid" do
     Order.any_instance.stubs(:valid?).returns(true)
-    post :create
-    response.should redirect_to(order_url(assigns[:order]))
+    post :create, :customer_id => 1
+    response.should redirect_to(customer_order_url(1, assigns[:order]))
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => Order.first
+    get :edit, :id => 1, :customer_id => 1
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
     Order.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Order.first
+    put :update, :id => 1, :customer_id => 1
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
     Order.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Order.first
-    response.should redirect_to(order_url(assigns[:order]))
+    put :update, :id => 1, :customer_id => 1
+    response.should redirect_to(customer_order_url(1, assigns[:order]))
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    order = Order.first
-    delete :destroy, :id => order
-    response.should redirect_to(orders_url)
-    Order.exists?(order.id).should be_false
+    delete :destroy, :id => 1, :customer_id => 1
+    response.should redirect_to(customer_orders_url(1))
+    Order.exists?(1).should be_false
   end
 end

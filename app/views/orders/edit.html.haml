@@ -1,8 +1,7 @@
-- title "Edit Order"
+%h1 Editing order
 
 = render 'form'
 
-%p
-  = link_to "Show", @order
-  |
-  = link_to "View All", orders_path
+= link_to 'Show', [@order.customer, @order]
+\|
+= link_to 'Back', customer_orders_path(@order.customer)
