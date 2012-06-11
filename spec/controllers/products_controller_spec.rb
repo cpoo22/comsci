@@ -1,8 +1,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ProductsController do
-  fixtures :all
   render_views
+
+  before(:each) do
+    FactoryGirl.create(:product)
+  end
 
   it "index action should render index template" do
     get :index

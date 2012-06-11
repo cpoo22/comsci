@@ -27,6 +27,7 @@ group :development, :test do
   gem 'ZenTest', '~> 4.5'
   gem "autotest-rails", "~> 4.1.0"
   gem 'nested_scaffold'
+  gem 'factory_girl_rails'
 end
 
 group :test do
