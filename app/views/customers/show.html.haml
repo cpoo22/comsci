@@ -46,3 +46,5 @@
   = link_to "Destroy", @customer, :confirm => 'Are you sure?', :method => :delete
   |
   = link_to "View All", customers_path
+  |
+  = link_to "View Orders", customer_orders_path(@customer)
