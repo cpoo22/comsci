@@ -12,6 +12,11 @@ class OrdersController < ApplicationController
   def new
     @customer = Customer.find(params[:customer_id])
     @order = @customer.orders.build
+    5.times do
+      order = @order.order_items.build
+      order.quantity = 1
+      order.discount = 0
+    end
   end
 
   def edit

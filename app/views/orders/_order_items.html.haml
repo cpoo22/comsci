@@ -1,0 +1,16 @@
+%tr
+  %td
+    = f.text_field :product_code, :onchange => 'return submitFormWithAjax($(this));'
+  %td
+    = f.text_field :product_name
+    -#= f.collection_select(:product_name, Product.all, :id, :name, options ={:prompt => "-Select an item"}, html={:onchange => 'return submitFormWithAjax();'} )
+  %td
+    = f.text_field :weight
+  %td
+    = f.text_field :unit_price
+  %td
+    = f.text_field :quantity, :onchange => 'return sum_row($(this));'
+  %td
+    = f.text_field :discount, :onchange => 'return sum_row($(this));;'
+  %td
+    = f.text_field :items_price, :onchange => 'return total($(this));'

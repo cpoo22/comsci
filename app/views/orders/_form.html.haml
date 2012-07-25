@@ -5,13 +5,21 @@
       %ul
         - @order.errors.full_messages.each do |msg|
           %li= msg
+  %table
+    %tr
+      %th Product Code
+      %th Product Name
+      %th Weight
+      %th Unit Price
+      %th Quantity
+      %th Discount %
+      %th Row Price
+    = f.fields_for :order_items do |order_item|
+      = render "order_items", :f => order_item
 
   .field
     = f.label :total_price
     = f.text_field :total_price
-  .field
-    = f.label :discount
-    = f.text_field :discount
   .field
     = f.label :order_date
     = f.date_select :order_date

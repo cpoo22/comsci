@@ -32,12 +32,14 @@ ActiveRecord::Schema.define(:version => 20120611144850) do
   end
 
   create_table "order_items", :force => true do |t|
-    t.float    "price"
+    t.integer  "order_id"
     t.string   "product_code"
+    t.string   "product_name"
+    t.integer  "weight"
+    t.float    "unit_price"
     t.integer  "quantity"
     t.float    "discount"
-    t.integer  "weight"
-    t.string   "product_name"
+    t.float    "items_price"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
