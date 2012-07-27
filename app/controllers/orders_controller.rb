@@ -38,11 +38,11 @@ class OrdersController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @order = @customer.orders.find(params[:id])
 
-      if @order.update_attributes(params[:order])
-        redirect_to([@order.customer, @order], :notice => 'Order was successfully updated.')
-      else
-        render :action => "edit"
-      end
+    if @order.update_attributes(params[:order])
+      redirect_to([@order.customer, @order], :notice => 'Order was successfully updated.')
+    else
+      render :action => "edit"
+    end
   end
 
   def destroy
