@@ -27,11 +27,11 @@ class OrdersController < ApplicationController
   def create
     @customer = Customer.find(params[:customer_id])
     @order = @customer.orders.build(params[:order])
-      if @order.save
-        redirect_to([@order.customer, @order], :notice => 'Order was successfully created.')
-      else
-        render :action => "new"
-      end
+    if !params[:preview_button] && @order.save
+      redirect_to([@order.customer, @order], :notice => 'Order was successfully created.')
+    else
+      render :action => "new"
+    end
   end
 
   def update
