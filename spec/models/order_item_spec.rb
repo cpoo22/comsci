@@ -3,9 +3,9 @@ require 'spec_helper'
 describe OrderItem do
 
   before(:each) do
-    @attr = {
+    @order_item_attrs = {
         :discount => 0,
-        :items_price => '8',
+        :items_price => 8,
         :product_code => '5000',
         :product_name => 'Becks',
         :quantity => 1,
@@ -28,21 +28,33 @@ describe OrderItem do
   describe "validations" do
 
     it "should be valid" do
-      OrderItem.new(@attr).should be_valid
+      OrderItem.new(@order_item_attrs).should be_valid
     end
 
     it "should create a valid instance given valid attibutes" do
-      OrderItem.create!(@attr)
+      OrderItem.create!(@order_item_attrs)
     end
 
     it "should require all attributes" do
       [:discount, :product_code, :product_name, :quantity, :weight, :unit_price, :items_price].each do |item|
-        expect { OrderItem.create!(@attr.merge(item => "")) }.to raise_error(ActiveRecord::RecordInvalid)
+        expect { OrderItem.create!(@order_item_attrs.merge(item => "")) }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
 
     it "should have a positive discount" do
-      expect {OrderItem.create!(@attr.merge(:discount => "-1"))}.to raise_error(ActiveRecord::RecordInvalid)
+      expect {OrderItem.create!(@order_item_attrs.merge(:discount => "-1"))}.to raise_error(ActiveRecord::RecordInvalid)
+    end
+
+    it "should have a positive unit_price" do
+      expect {OrderItem.create!(@order_item_attrs.merge(:unit_price => "-1"))}.to raise_error(ActiveRecord::RecordInvalid)
+    end
+
+    it "should have a positive weight" do
+      expect {OrderItem.create!(@order_item_attrs.merge(:weight => "-1"))}.to raise_error(ActiveRecord::RecordInvalid)
+    end
+
+    it "should have a positive items price" do
+      expect {OrderItem.create!(@order_item_attrs.merge(:items_price => "-1"))}.to raise_error(ActiveRecord::RecordInvalid)
     end
 
   end
@@ -50,7 +62,7 @@ describe OrderItem do
   describe "associations" do
 
     before(:each) do
-      @order_item = OrderItem.create!(@attr)
+      @order_item = OrderItem.create!(@order_item_attrs)
     end
 
     it "should have an order attribute" do
@@ -62,7 +74,7 @@ describe OrderItem do
   describe "items price" do
 
     before(:each) do
-      @order_item = OrderItem.create!(@attr)
+      @order_item = OrderItem.new(@order_item_attrs.merge({:items_price => nil}))
     end
 
     it "should be (quantity * unit price) - discount" do
