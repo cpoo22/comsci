@@ -7,7 +7,7 @@ class OrderItem < ActiveRecord::Base
   validates_numericality_of :discount, :unit_price, :items_price, :weight, :greater_than_or_equal_to => 0
 
   def calc_item_total
-    self.items_price = ((self.quantity * self.unit_price)/100 * (100 - self.discount))
+    self.items_price = (((self.quantity||0) * (self.unit_price||0))/100 * (100 - (self.discount||0)))
   end
 
 end

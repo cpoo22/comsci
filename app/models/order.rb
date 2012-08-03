@@ -13,14 +13,15 @@ class Order < ActiveRecord::Base
   def calc_order_price
     self.total_price = 0
     self.order_items.each do |item|
-      self.total_price += item.items_price
+      item.calc_item_total
+      self.total_price += (item.items_price || 0)
     end
   end
 
   def calc_order_weight
     self.total_weight = 0
     self.order_items.each do |item|
-      self.total_weight += item.weight * item.quantity
+      self.total_weight += (item.weight || 0) * (item.quantity || 0)
     end
   end
 

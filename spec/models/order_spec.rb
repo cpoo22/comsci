@@ -60,7 +60,6 @@ describe Order do
     let (:order_item_1) do
       {
           :discount => 0,
-          :items_price => 1,
           :product_code => '5000',
           :product_name => 'Becks',
           :quantity => 1,
@@ -68,15 +67,15 @@ describe Order do
           :unit_price => 1,
       }
     end
+
     let (:order_item_2) do
       {
           :discount => 0,
-          :items_price => 100,
           :product_code => '5001',
           :product_name => 'Clarks',
           :quantity => 10,
           :weight => 10,
-          :unit_price => 10,
+          :unit_price => 56765,
       }
     end
 
@@ -92,7 +91,7 @@ describe Order do
     context "total_price" do
       it "should be correct total price" do
         @order.calc_order_price
-        @order.total_price.should == 101
+        @order.total_price.should == 567651
       end
     end
 
@@ -106,7 +105,7 @@ describe Order do
     context "tot_me_up" do
       it "should total the whole order" do
         @order.tot_me_up
-        @order.total_price.should == 101
+        @order.total_price.should == 567651
         @order.total_weight.should == 101
       end
     end
