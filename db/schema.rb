@@ -36,22 +36,22 @@ ActiveRecord::Schema.define(:version => 20120611144850) do
     t.string   "product_code"
     t.string   "product_name"
     t.integer  "weight"
-    t.float    "unit_price"
+    t.decimal  "unit_price",   :precision => 8, :scale => 2
     t.integer  "quantity"
-    t.float    "discount"
-    t.float    "items_price"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "discount"
+    t.decimal  "items_price",  :precision => 8, :scale => 2
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "orders", :force => true do |t|
     t.integer  "customer_id"
-    t.float    "total_price"
-    t.float    "discount"
+    t.decimal  "total_price",  :precision => 8, :scale => 2
+    t.integer  "discount"
     t.date     "order_date"
     t.integer  "total_weight"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(:version => 20120611144850) do
     t.string   "code"
     t.string   "name"
     t.integer  "weight"
-    t.float    "price"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.decimal  "price",      :precision => 8, :scale => 2
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
 end

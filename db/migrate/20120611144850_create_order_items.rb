@@ -5,10 +5,10 @@ class CreateOrderItems < ActiveRecord::Migration
       t.string :product_code
       t.string :product_name
       t.integer :weight
-      t.float :unit_price
+      t.decimal :unit_price, :precision => 8, :scale => 2
       t.integer :quantity
-      t.float :discount
-      t.float :items_price
+      t.integer :discount
+      t.decimal :items_price, :precision => 8, :scale => 2
 
       t.timestamps
     end

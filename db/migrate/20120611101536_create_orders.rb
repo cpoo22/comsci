@@ -2,8 +2,8 @@ class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
       t.references :customer
-      t.float :total_price
-      t.float :discount
+      t.decimal :total_price, :precision => 8, :scale => 2
+      t.integer :discount
       t.date :order_date
       t.integer :total_weight
 
