@@ -5,3 +5,26 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Customer.create(  :title => 'Mr',
+        :first_name => 'Chris',
+        :last_name => 'Chris',
+        :address_line_1  => '2 Hewly Close',
+        :address_line_2 => 'Fumblton',
+        :address_line_3 => 'Edgware',
+        :town => 'Brighton',
+        :county => 'West Sussex',
+        :country => 'UK',
+        :postcode => 'BN1 1AL',
+        :telephone_number => '01273 456789',
+        :mobile_number => '07789987654',
+        :email => 'test@testing.com')
+
+Product.create(:code => '5000',
+        :name => 'Becks',
+        :weight => 1,
+        :price => 10)
+
+Product.create(:code => '5001',
+        :name => 'Silver',
+        :weight => 2,
+        :price => 17.54)
