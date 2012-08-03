@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
+
 
 describe CustomersController do
   render_views
@@ -9,22 +10,26 @@ describe CustomersController do
 
   it "index action should render index template" do
     get :index
+    response.should be_success
     response.should render_template(:index)
   end
 
   it "show action should render show template" do
     get :show, :id => Customer.first
+    response.should be_success
     response.should render_template(:show)
   end
 
   it "new action should render new template" do
     get :new
+    response.should be_success
     response.should render_template(:new)
   end
 
   it "create action should render new template when model is invalid" do
     Customer.any_instance.stubs(:valid?).returns(false)
     post :create
+    response.should be_success
     response.should render_template(:new)
   end
 
@@ -34,14 +39,23 @@ describe CustomersController do
     response.should redirect_to(customer_url(assigns[:customer]))
   end
 
+  it "create action should create customer" do
+    Customer.any_instance.stubs(:valid?).returns(true)
+    expect{
+      post :create
+    }.to change(Customer, :count).by 1
+  end
+
   it "edit action should render edit template" do
     get :edit, :id => Customer.first
+    response.should be_success
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
     Customer.any_instance.stubs(:valid?).returns(false)
     put :update, :id => Customer.first
+    response.should be_success
     response.should render_template(:edit)
   end
 
