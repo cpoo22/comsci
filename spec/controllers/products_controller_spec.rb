@@ -39,6 +39,7 @@ describe ProductsController do
     response.should be_redirect
     response.should redirect_to(product_url(assigns[:product]))
   end
+
   it "should create a product" do
     Product.any_instance.stubs(:valid?).returns(true)
     expect {
