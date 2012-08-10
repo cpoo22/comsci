@@ -23,6 +23,7 @@ describe Order do
     it { should respond_to :calc_order_price }
     it { should respond_to :calc_order_weight }
     it { should respond_to :tot_me_up }
+    it { should respond_to :update_products }
   end
 
   describe "validations" do
@@ -56,6 +57,70 @@ describe Order do
     it { should respond_to :customer }
   end
 
+  describe "when updating order products" do
+
+    let (:order_item_1) do
+      {
+          :product_code => '5000',
+      }
+    end
+
+    let (:order_item_2) do
+      {
+          :product_code => '5001',
+      }
+    end
+
+    let (:order_item_3) do
+      {
+          :product_code => nil,
+      }
+    end
+
+    let(:product_attr1){
+       {
+         :code => '5000',
+         :name => 'Becks',
+         :weight => 1,
+         :price => 10,
+       }
+     }
+
+    let(:product_attr2){
+       {
+         :code => '5001',
+         :name => 'Silver',
+         :weight => 2,
+         :price => 20.89,
+       }
+     }
+
+    before(:each) do
+      @order_attrs[:order_items_attributes] = [order_item_1, order_item_2, order_item_3]
+      @order = Order.new(@order_attrs.merge({:total_price => nil, :total_weight => nil}))
+    end
+
+
+    context "update products" do
+      it "should update the order item products correctly" do
+        product = Product.new product_attr1
+        Product.stubs(:find_by_code).with("5000").returns(product)
+        product = Product.new product_attr2
+        Product.stubs(:find_by_code).with("5001").returns(product)
+        Product.stubs(:find_by_code).with(nil).returns(nil)
+        @order.update_products
+        @order.order_items[0].product_name.should == "Becks"
+        @order.order_items[0].unit_price.should == 10
+        @order.order_items[0].weight.should == 1
+        @order.order_items[1].product_name.should == "Silver"
+        @order.order_items[1].unit_price.should == 20.89
+        @order.order_items[1].weight.should == 2
+      end
+    end
+
+
+  end
+
   describe "when totaling orders" do
     let (:order_item_1) do
       {
@@ -67,7 +132,6 @@ describe Order do
           :unit_price => 1,
       }
     end
-
     let (:order_item_2) do
       {
           :discount => 0,

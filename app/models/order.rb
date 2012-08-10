@@ -29,4 +29,10 @@ class Order < ActiveRecord::Base
     self.calc_order_price
     self.calc_order_weight
   end
+
+  def update_products
+    self.order_items.each {|item| item.update_product }
+  end
+
+
 end
