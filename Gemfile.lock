@@ -166,6 +166,7 @@ DEPENDENCIES
   nested_scaffold
   nifty-generators
   rails (= 3.2.5)
+  rspec
   rspec-rails
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)

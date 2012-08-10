@@ -20,6 +20,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'nifty-generators'
   gem 'autotest-growl'
