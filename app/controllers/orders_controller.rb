@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
   def create
     @customer = Customer.find(params[:customer_id])
     @order = @customer.orders.build(params[:order])
+    tidy_order @order
     if !params[:preview_button] && @order.save
       redirect_to([@order.customer, @order], :notice => 'Order was successfully created.')
     else
@@ -51,5 +52,10 @@ class OrdersController < ApplicationController
     @order.destroy
 
     redirect_to customer_orders_url(@customer)
+  end
+
+  def tidy_order order
+    order.update_products
+    order.tot_me_up
   end
 end

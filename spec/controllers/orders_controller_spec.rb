@@ -46,7 +46,7 @@ describe OrdersController do
     }.to change(Order, :count).by 1
   end
 
-  it "create via preview button should redirect to new" do
+  it "create via preview button should render new template " do
     Order.any_instance.stubs(:valid?).returns(true)
     post :create, :customer_id => @order.customer, :preview_button => 'true'
     response.should be_success
@@ -78,5 +78,12 @@ describe OrdersController do
     response.should be_redirect
     response.should redirect_to(customer_orders_url(@order.customer))
     Order.exists?(1).should be_false
+  end
+
+  it "tidy_order should update order products and total order" do
+    order = mock("order")
+    order.expects(:update_products)
+    order.expects(:tot_me_up)
+    controller.tidy_order(order)
   end
 end
