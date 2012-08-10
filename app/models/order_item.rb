@@ -10,4 +10,13 @@ class OrderItem < ActiveRecord::Base
     self.items_price = (((self.quantity||0) * (self.unit_price||0))/100 * (100 - (self.discount||0)))
   end
 
+  def update_product
+    product = Product.find_by_code self.product_code
+    if product
+      self.product_name = product.name
+      self.unit_price = product.price
+      self.weight = product.weight
+    end
+  end
+
 end

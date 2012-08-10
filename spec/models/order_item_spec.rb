@@ -25,6 +25,10 @@ describe OrderItem do
     it { should respond_to :calc_item_total }
   end
 
+  describe "methods" do
+    it {should respond_to :update_product}
+  end
+
   describe "validations" do
 
     it "should be valid" do
@@ -91,5 +95,32 @@ describe OrderItem do
     end
 
   end
+
+  describe "update_products" do
+
+    before(:each) do
+      @order_item = OrderItem.new({:product_code => '5000', :quantity => 1 })
+    end
+
+    let(:product_attr){
+      {
+        :code => '5000',
+        :name => 'Becks',
+        :weight => 1,
+        :price => 10,
+      }
+    }
+
+    it "should update the product name, unit price and weight" do
+      product = Product.new product_attr
+      Product.stubs(:find_by_code).with("5000").returns(product)
+
+      @order_item.update_product
+      @order_item.product_name.should == "Becks"
+      @order_item.unit_price.should == 10
+      @order_item.weight.should == 1
+    end
+  end
+
 
 end
