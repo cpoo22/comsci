@@ -77,6 +77,17 @@ describe Order do
       expect { Order.create!(order_attrs.merge(:total_weight => "-1")) }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
+    it "should not error when try to save empty items" do
+      order_attrs[:order_items_attributes] = [order_item_1, order_item_2, {}]
+      expect{Order.create!(order_attrs)}.to_not raise_error ActiveRecord::RecordInvalid
+    end
+
+    it "should not save empty items" do
+      order_attrs[:order_items_attributes] = [order_item_1, order_item_2, {}]
+      order = Order.create!(order_attrs)
+      order.order_items.size.should == 2
+    end
+
   end
 
   describe "associations" do
