@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Order do
 
 
-  before(:each) do
-    @order_attrs = {
+  let (:order_attrs) do
+    {
         :discount => 0,
         :order_date => Time.now,
         :total_price => 1,
@@ -28,26 +28,53 @@ describe Order do
 
   describe "validations" do
 
+    let (:order_item_1) do
+      {
+          :discount => 0,
+          :product_code => '5000',
+          :product_name => 'Becks',
+          :quantity => 1,
+          :weight => 1,
+          :unit_price => 1,
+          :items_price => 9,
+      }
+    end
+    let (:order_item_2) do
+      {
+          :discount => 0,
+          :product_code => '5001',
+          :product_name => 'Clarks',
+          :quantity => 10,
+          :weight => 10,
+          :unit_price => 56765,
+          :items_price => 9,
+      }
+    end
+
+    before(:each) do
+      order_attrs[:order_items_attributes] = [order_item_1, order_item_2]
+    end
+
     it "should be valid" do
-      Order.new(@order_attrs).should be_valid
+      Order.new(order_attrs).should be_valid
     end
 
     it "should create a valid instance given valid attibutes" do
-      Order.create!(@order_attrs)
+      Order.create!(order_attrs)
     end
 
     it "should require most attributes" do
       [:order_date, :total_price, :total_weight].each do |item|
-        expect { Order.create!(@order_attrs.merge(item => "")) }.to raise_error(ActiveRecord::RecordInvalid)
+        expect { Order.create!(order_attrs.merge(item => "")) }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
 
     it "should have a positive total_price" do
-      expect {Order.create!(@order_attrs.merge(:total_price => "-1"))}.to raise_error(ActiveRecord::RecordInvalid)
+      expect { Order.create!(order_attrs.merge(:total_price => "-1")) }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it "should have a positive total_weight" do
-      expect {Order.create!(@order_attrs.merge(:total_weight => "-1"))}.to raise_error(ActiveRecord::RecordInvalid)
+      expect { Order.create!(order_attrs.merge(:total_weight => "-1")) }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
   end
@@ -77,27 +104,27 @@ describe Order do
       }
     end
 
-    let(:product_attr1){
-       {
-         :code => '5000',
-         :name => 'Becks',
-         :weight => 1,
-         :price => 10,
-       }
-     }
+    let(:product_attr1) {
+      {
+          :code => '5000',
+          :name => 'Becks',
+          :weight => 1,
+          :price => 10,
+      }
+    }
 
-    let(:product_attr2){
-       {
-         :code => '5001',
-         :name => 'Silver',
-         :weight => 2,
-         :price => 20.89,
-       }
-     }
+    let(:product_attr2) {
+      {
+          :code => '5001',
+          :name => 'Silver',
+          :weight => 2,
+          :price => 20.89,
+      }
+    }
 
     before(:each) do
-      @order_attrs[:order_items_attributes] = [order_item_1, order_item_2, order_item_3]
-      @order = Order.new(@order_attrs.merge({:total_price => nil, :total_weight => nil}))
+      order_attrs[:order_items_attributes] = [order_item_1, order_item_2, order_item_3]
+      @order = Order.new(order_attrs.merge({:total_price => nil, :total_weight => nil}))
     end
 
 
@@ -144,8 +171,8 @@ describe Order do
     end
 
     before(:each) do
-      @order_attrs[:order_items_attributes] = [order_item_1, order_item_2]
-      @order = Order.new(@order_attrs.merge({:total_price => nil, :total_weight => nil}))
+      order_attrs[:order_items_attributes] = [order_item_1, order_item_2]
+      @order = Order.new(order_attrs.merge({:total_price => nil, :total_weight => nil}))
     end
 
     it "should have 2 order items" do
