@@ -25,6 +25,12 @@ describe OrdersController do
     response.should render_template(:new)
   end
 
+  it "new action should always have exactly one empty item" do
+    get :new, :customer_id => Customer.first
+    assigns(:order).order_items.size.should == 1
+    assigns(:order).order_items[0].should be_empty
+  end
+
   it "create action should render new template when model is invalid" do
     Order.any_instance.stubs(:valid?).returns(false)
     post :create, :customer_id => Customer.first
@@ -47,6 +53,16 @@ describe OrdersController do
   end
 
   it "create via preview button should render new template " do
+    Order.any_instance.stubs(:valid?).returns(true)
+    post :create, :customer_id => @order.customer, :preview_button => 'true'
+    only_one = 0
+    assigns(:order).order_items.each do |item|
+      only_one += 1 if item.empty?
+    end
+    only_one.should == 1
+  end
+
+  it "create via preview button should have exactly 1 empty item " do
     Order.any_instance.stubs(:valid?).returns(true)
     post :create, :customer_id => @order.customer, :preview_button => 'true'
     response.should be_success
