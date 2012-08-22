@@ -36,10 +36,12 @@ class OrdersController < ApplicationController
   def update
     @customer = Customer.find(params[:customer_id])
     @order = @customer.orders.find(params[:id])
-
-    if @order.update_attributes(params[:order])
+    @order.assign_attributes(params[:order])
+    tidy_order @order
+    if !params[:preview_button] && @order.update_attributes(params[:order])
       redirect_to([@order.customer, @order], :notice => 'Order was successfully updated.')
     else
+      add_one_item
       render :action => "edit"
     end
   end
