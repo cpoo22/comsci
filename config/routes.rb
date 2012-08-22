@@ -1,10 +1,12 @@
 Comsci::Application.routes.draw do
+
   resources :customers do
     resources :orders
   end
 
   resources :products, :customers
 
+  match 'search' => 'pages#search'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
