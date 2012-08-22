@@ -12,14 +12,13 @@ class OrdersController < ApplicationController
   def new
     @customer = Customer.find(params[:customer_id])
     @order = @customer.orders.build
-    order = @order.order_items.build
-    order.quantity = 1
-    order.discount = 0
+    add_one_item
   end
 
   def edit
     @customer = Customer.find(params[:customer_id])
     @order = @customer.orders.find(params[:id])
+    add_one_item
   end
 
   def create
@@ -29,10 +28,7 @@ class OrdersController < ApplicationController
     if !params[:preview_button] && @order.save
       redirect_to([@order.customer, @order], :notice => 'Order was successfully created.')
     else
-      order = @order.order_items.build
-      order.quantity = 1
-      order.discount = 0
-
+      add_one_item
       render :action => "new"
     end
   end
@@ -60,4 +56,11 @@ class OrdersController < ApplicationController
     order.update_products
     order.tot_me_up
   end
+
+  def add_one_item
+    order = @order.order_items.build
+    order.quantity = 1
+    order.discount = 0
+  end
+
 end
