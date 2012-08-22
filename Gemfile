@@ -10,7 +10,7 @@ gem 'jquery-rails'
 
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -21,6 +21,9 @@ end
 
 group :development, :test do
   gem 'rspec'
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-mocks'
   gem 'rspec-rails'
   gem 'nifty-generators'
   gem 'autotest-growl'
