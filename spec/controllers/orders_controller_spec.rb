@@ -67,14 +67,14 @@ describe OrdersController do
       describe "via preview button" do
         it "create via preview button should render new template" do
           Order.any_instance.stubs(:valid?).returns(true)
-          post :create, :customer_id => @order.customer, :preview_button => 'true'
+          post :create, :customer_id => @order.customer, :preview_button => 'Update'
           response.should be_success
           response.should render_template(:new)
         end
 
         it "update via preview button should render edit template" do
           Order.any_instance.stubs(:valid?).returns(true)
-          put :update, :id => @order, :customer_id => @order.customer, :preview_button => 'true'
+          put :update, :id => @order, :customer_id => @order.customer, :preview_button => 'Update'
           response.should be_success
           response.should render_template(:edit)
         end
@@ -108,7 +108,7 @@ describe OrdersController do
 
     it "create via preview button should have exactly 1 empty item " do
       Order.any_instance.stubs(:valid?).returns(true)
-      post :create, :customer_id => @order.customer, :preview_button => 'true'
+      post :create, :customer_id => @order.customer, :preview_button => 'Update'
       only_one_empty_item_row
     end
 
@@ -118,10 +118,9 @@ describe OrdersController do
       only_one_empty_item_row
     end
 
-
     it "update via preview button should have exactly 1 empty item " do
       Order.any_instance.stubs(:valid?).returns(true)
-      put :update, :id => @order, :customer_id => @order.customer, :preview_button => 'true'
+      put :update, :id => @order, :customer_id => @order.customer, :preview_button => 'Update'
       only_one_empty_item_row
     end
 
