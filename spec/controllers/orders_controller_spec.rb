@@ -27,22 +27,9 @@ describe OrdersController do
         response.should be_success
         response.should render_template(:new)
       end
-
-      describe "via preview button" do
-
-        it "create via preview button should render new template" do
-          Order.any_instance.stubs(:valid?).returns(true)
-          post :create, :customer_id => @order.customer, :preview_button => 'true'
-          response.should be_success
-          response.should render_template(:new)
-        end
-
-      end
-
     end
 
     describe "post" do
-
       it "create action should render new template when model is invalid" do
         Order.any_instance.stubs(:valid?).returns(false)
         post :create, :customer_id => Customer.first
@@ -78,6 +65,12 @@ describe OrdersController do
       end
 
       describe "via preview button" do
+        it "create via preview button should render new template" do
+          Order.any_instance.stubs(:valid?).returns(true)
+          post :create, :customer_id => @order.customer, :preview_button => 'true'
+          response.should be_success
+          response.should render_template(:new)
+        end
 
         it "update via preview button should render edit template" do
           Order.any_instance.stubs(:valid?).returns(true)
@@ -85,9 +78,7 @@ describe OrdersController do
           response.should be_success
           response.should render_template(:edit)
         end
-
       end
-
     end
 
     it "destroy action should destroy model and redirect to index action" do
@@ -99,25 +90,21 @@ describe OrdersController do
 
   end
 
-
-  it "new action should always have exactly one empty item" do
-    get :new, :customer_id => Customer.first
-    assigns(:order).order_items.size.should == 1
-    assigns(:order).order_items[0].should be_empty
-  end
-
   describe "database changes" do
-
     it "create action should create a new Order" do
       Order.any_instance.stubs(:valid?).returns(true)
       expect {
         post :create, :customer_id => @order.customer
       }.to change(Order, :count).by 1
     end
-
   end
 
   describe "always having an empty row" do
+    it "new action should always have exactly one empty item" do
+      get :new, :customer_id => Customer.first
+      assigns(:order).order_items.size.should == 1
+      assigns(:order).order_items[0].should be_empty
+    end
 
     it "create via preview button should have exactly 1 empty item " do
       Order.any_instance.stubs(:valid?).returns(true)
