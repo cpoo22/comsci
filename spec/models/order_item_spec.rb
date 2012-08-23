@@ -120,6 +120,16 @@ describe OrderItem do
       @order_item.unit_price.should == 10
       @order_item.weight.should == 1
     end
+
+    it "should not update the unit price if present" do
+      product = Product.new product_attr
+      @order_item.unit_price = 300
+      Product.stubs(:find_by_code).with("5000").returns(product)
+
+      @order_item.update_product
+      @order_item.unit_price.should == 300
+    end
+
   end
 
 

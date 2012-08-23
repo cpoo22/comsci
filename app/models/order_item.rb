@@ -18,7 +18,7 @@ class OrderItem < ActiveRecord::Base
     product = Product.find_by_code self.product_code
     if product
       self.product_name = product.name
-      self.unit_price = product.price
+      self.unit_price = product.price unless self.unit_price
       self.weight = product.weight
     end
   end
