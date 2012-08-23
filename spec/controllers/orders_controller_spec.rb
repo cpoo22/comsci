@@ -125,8 +125,28 @@ describe OrdersController do
       only_one_empty_item_row
     end
 
-  end
+    it "update via preview button should populate the order item" do
+      order = FactoryGirl.create(:order)
+      FactoryGirl.create(:product)
 
+      atts = {"order"=>{
+          "order_items_attributes"=> {
+              "0"=> {
+                  "product_code"=>"5000"
+              }
+          },
+          "total_price"=>"140.0",
+          "order_date(1i)"=>"2012",
+          "order_date(2i)"=>"8",
+          "order_date(3i)"=>"22",
+          "total_weight"=>"14"
+      }}
+
+      put :update, {:customer_id => order.customer, :id => order, "preview_button"=>"Update"}.merge(atts)
+
+      assigns(:order).order_items[0].product_name.should_not be_blank
+    end
+  end
 
   it "tidy_order should update order products and total order" do
     order = mock("order")
