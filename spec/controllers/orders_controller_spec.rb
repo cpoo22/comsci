@@ -124,6 +124,16 @@ describe OrdersController do
       only_one_empty_item_row
     end
 
+  end
+
+  describe "order behavoiur " do
+    it "tidy_order should update order products and total order" do
+      order = mock("order")
+      order.expects(:update_products)
+      order.expects(:tot_me_up)
+      controller.tidy_order(order)
+    end
+
     it "update via preview button should populate the order item" do
       order = FactoryGirl.create(:order)
       FactoryGirl.create(:product)
@@ -143,15 +153,10 @@ describe OrdersController do
 
       put :update, {:customer_id => order.customer, :id => order, "preview_button"=>"Update"}.merge(atts)
 
-      assigns(:order).order_items[0].product_name.should_not be_blank
+      assigns(:order).order_items[0].product_name.should == "Becks Silver Zapper"
+      assigns(:order).order_items[0].weight.should == 10
+      assigns(:order).order_items[0].unit_price.should == 1.5
     end
-  end
-
-  it "tidy_order should update order products and total order" do
-    order = mock("order")
-    order.expects(:update_products)
-    order.expects(:tot_me_up)
-    controller.tidy_order(order)
   end
 
 
