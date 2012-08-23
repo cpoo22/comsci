@@ -24,6 +24,7 @@ describe OrdersController do
 
       it "new action should render new template" do
         get :new, :customer_id => Customer.first
+        response.should be_success
         response.should render_template(:new)
       end
 
