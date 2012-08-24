@@ -57,6 +57,18 @@ describe PagesController do
       end
     end
 
+    context "for product" do
+      it "should set results" do
+        post :search, :search_param => '5000'
+        assigns[:product_results].should_not be_nil
+      end
+
+      it "should find product on code" do
+        post :search, :search_param => '5000'
+        assigns[:product_results].values.should include '5000, Becks Silver Zapper, Price: &pound;1.5, Weight: 10g'
+      end
+    end
+
   end
 
 end

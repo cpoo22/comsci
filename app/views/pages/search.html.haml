@@ -5,12 +5,22 @@
 
   = button_tag "Search", :id => "search", :type => 'submit'
 
-%h1 Customers
+-unless @customer_results.blank?
+  %h1 Customers
 
-%ul
-  -if @customer_results
+  %ul
     -@customer_results.each_pair do |link, customer|
       %li
         = link_to link do
           = customer
+
+
+-unless @product_results.blank?
+  %h1 Products
+
+  %ul
+    -@product_results.each_pair do |link, product|
+      %li
+        = link_to link do
+          = product
 
