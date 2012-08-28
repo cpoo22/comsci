@@ -27,18 +27,23 @@ describe PagesController do
         assigns[:customer_results].should_not be_nil
       end
 
-      it "should find customer on first name (case insensitive)" do
+      it "should find customer based on first name (case insensitive)" do
         post :search, :search_param => 'jOhN'
         assigns[:customer_results].values.should include 'John Doe, 22 Sharon Lane, TH78 6YH'
       end
 
-      it "should find customer on last name (case insensitive)" do
+      it "should find customer based on last name (case insensitive)" do
         post :search, :search_param => 'dOe'
         assigns[:customer_results].values.should include 'John Doe, 22 Sharon Lane, TH78 6YH'
       end
 
-      it "should find customer on postcode (case insensitive)" do
+      it "should find customer based on postcode (case insensitive)" do
         post :search, :search_param => 'Th78 6Yh'
+        assigns[:customer_results].values.should include 'John Doe, 22 Sharon Lane, TH78 6YH'
+      end
+
+      it "should find customer based on telephone (partial)" do
+        post :search, :search_param => '76476'
         assigns[:customer_results].values.should include 'John Doe, 22 Sharon Lane, TH78 6YH'
       end
 
@@ -66,6 +71,18 @@ describe PagesController do
       it "should find product on code" do
         post :search, :search_param => '5000'
         assigns[:product_results].values.should include '5000, Becks Silver Zapper, Price: &pound;1.5, Weight: 10g'
+      end
+
+      it "should find product based on name (partial, case insensitive)" do
+        FactoryGirl.create(:product, name: 'sIlVeR')
+        post :search, :search_param => 'silver'
+        assigns[:product_results].values.should include '5000, Becks Silver Zapper, Price: &pound;1.5, Weight: 10g'
+        assigns[:product_results].values.should include '5000, sIlVeR, Price: &pound;1.5, Weight: 10g'
+      end
+
+      it "should be empty if there are no results" do
+        post :search, :search_param => '1000'
+        assigns[:product_results].should be_empty
       end
     end
 
