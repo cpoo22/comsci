@@ -3,9 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 nav {
-    float: right;
+  float: right;
 }
 
 #container{
-    clear: both;
+  clear: both;
+}
+
+.address p {
+  line-height: 0px;
+}
+
+.cust_label {
+  padding-right: 100px;
 }
