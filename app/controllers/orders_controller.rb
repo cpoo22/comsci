@@ -56,7 +56,9 @@ class OrdersController < ApplicationController
   end
 
   def tidy_order order
-    order.postage = PostalCost.find(order.postage_type).cost if order.postage_type.present?
+    order.postage_type = params['postage_type'] if params['postage_type']
+    #order.postage = PostalCost.order("weight ASC").where("code = '#{order.postage_type}' and weight >= ?", @order.total_weight).first.cost
+
     order.update_products
     order.tot_me_up
   end

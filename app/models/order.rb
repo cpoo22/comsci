@@ -29,6 +29,8 @@ class Order < ActiveRecord::Base
   def tot_me_up
     self.calc_order_price
     self.calc_order_weight
+    self.postage = PostalCost.order("weight ASC").where("code = '#{self.postage_type}' and weight >= ?", self.total_weight).first.cost
+
   end
 
   def update_products

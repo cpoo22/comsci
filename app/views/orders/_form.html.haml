@@ -30,7 +30,7 @@
     = f.number_field :postage, :onchange => 'submit();'
   .field
     = f.label :postage_type
-    = f.collection_select(:postage_type, PostalCost.all, :id, :code, options ={:prompt => "-Select an postage"}, html={:onchange => 'submit();'} )
+    = f.text_field :postage_type, html={:onchange => 'submit();'}
   .field
     = f.label :total_price
     = f.text_field :total_price
@@ -38,5 +38,8 @@
     = f.label :total_weight
     = f.number_field :total_weight
   .actions
-    = f.button 'Save', :name => 'save_button', :onclick => 'submit();'
     = f.button 'Update', :onclick => 'submit();'
+    = f.button 'Save', :name => 'save_button', :onclick => 'submit();'
+  .actions
+    - %w(1st 2nd 3rd).each do |post|
+      = f.button post + ' : ' + postage(post).to_s, name: 'postage_type', value: post

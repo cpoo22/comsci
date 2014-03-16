@@ -58,6 +58,12 @@ Product.create(:code => '5001',
         :weight => 2,
         :price => 17.54)
 
-PostalCost.create( code: '1st', weight: 1.1, cost: 2.1)
-PostalCost.create( code: '2nd', weight: 1.2, cost: 2.2)
-PostalCost.create( code: '3rd', weight: 1.3, cost: 2.3)
+PostalCost.create( code: '1st', weight: 1, cost: 1.1)
+PostalCost.create( code: '1st', weight: 2, cost: 1.2)
+PostalCost.create( code: '1st', weight: 3, cost: 1.3)
+PostalCost.create( code: '2nd', weight: 1, cost: 2.1)
+PostalCost.create( code: '2nd', weight: 2, cost: 2.2)
+PostalCost.create( code: '2nd', weight: 3, cost: 2.3)
+PostalCost.create( code: '3rd', weight: 1, cost: 3.1)
+PostalCost.create( code: '3rd', weight: 2, cost: 3.2)
+PostalCost.create( code: '3rd', weight: 3, cost: 3.3)
