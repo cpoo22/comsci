@@ -9,6 +9,8 @@ class CreateOrderItems < ActiveRecord::Migration
       t.integer :quantity
       t.integer :discount
       t.decimal :items_price, :precision => 8, :scale => 2
+      t.string :serial_no
+      t.decimal :postage, :precision => 8, :scale => 2
 
       t.timestamps
     end

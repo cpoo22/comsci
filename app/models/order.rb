@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
 
   validates_numericality_of :total_price, :total_weight, :greater_than_or_equal_to => 0
 
-  attr_accessible :discount, :order_date, :total_price, :total_weight, :order_items_attributes
+  attr_accessible :discount, :order_date, :total_price, :total_weight, :order_items_attributes, :postage, :postage_type
 
   def calc_order_price
     self.total_price = 0
@@ -15,6 +15,8 @@ class Order < ActiveRecord::Base
       item.calc_item_total
       self.total_price += (item.items_price || 0)
     end
+    self.total_price = self.total_price/100*(100 - discount) if discount
+    self.total_price = self.total_price + self.postage if self.postage
   end
 
   def calc_order_weight

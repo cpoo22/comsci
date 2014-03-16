@@ -5,27 +5,38 @@
       %ul
         - @order.errors.full_messages.each do |msg|
           %li= msg
+  %p
+    Order Date
+    =@order.order_date.strftime("%d/%m/%Y")
+  =f.hidden_field :order_date
+
   %table
     %tr
       %th Product Code
-      %th Product Name
-      %th Weight
-      %th Unit Price
       %th Quantity
+      %th Description
+      %th Unit Price
       %th Discount %
-      %th Row Price
+      %th Sub total
+      %th Weight
     = f.fields_for :order_items do |order_item|
       = render "order_items", :f => order_item
 
   .field
+    = f.label 'Discount %'
+    = f.text_field :discount, :onchange => 'submit();'
+  .field
+    = f.label :postage
+    = f.number_field :postage, :onchange => 'submit();'
+  .field
+    = f.label :postage_type
+    = f.collection_select(:postage_type, PostalCost.all, :id, :code, options ={:prompt => "-Select an postage"}, html={:onchange => 'submit();'} )
+  .field
     = f.label :total_price
     = f.text_field :total_price
-  .field
-    = f.label :order_date
-    = f.date_select :order_date
   .field
     = f.label :total_weight
     = f.number_field :total_weight
   .actions
-    = f.submit 'Save', :name => 'save_button'
-    = f.submit 'Update'
+    = f.button 'Save', :name => 'save_button', :onclick => 'submit();'
+    = f.button 'Update', :onclick => 'submit();'

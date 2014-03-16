@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20140316124637) do
     t.integer  "quantity"
     t.integer  "discount"
     t.decimal  "items_price",  :precision => 8, :scale => 2
+    t.string   "serial_no"
+    t.decimal  "postage",      :precision => 8, :scale => 2
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
   end
@@ -65,6 +67,9 @@ ActiveRecord::Schema.define(:version => 20140316124637) do
     t.integer  "discount"
     t.date     "order_date"
     t.integer  "total_weight"
+    t.string   "agent_id"
+    t.decimal  "postage",      :precision => 8, :scale => 2
+    t.string   "postage_type"
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
   end

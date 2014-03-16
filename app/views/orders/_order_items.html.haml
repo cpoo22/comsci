@@ -2,15 +2,15 @@
   %td
     = f.text_field :product_code, :class => 'product', :onchange => 'submit();'
   %td
+    = f.text_field :quantity, :onchange => 'submit();', :class => 'quantity'
+  %td
     = f.text_field :product_name, :class => 'name', :readonly => true
     -#= f.collection_select(:product_name, Product.all, :id, :name, options ={:prompt => "-Select an item"}, html={:onchange => 'return submitFormWithAjax();'} )
   %td
+    = f.text_field :unit_price, :class => 'unit_price', :onchange => 'submit();'
+  %td
+    = f.text_field :discount, :onchange => 'submit();', :class => 'discount'
+  %td
+    = f.text_field :items_price, :class => 'items_price', :readonly => true
+  %td
     = f.text_field :weight, :class => 'weight', :readonly => true
-  %td
-    = f.text_field :unit_price, :class => 'unit_price'
-  %td
-    = f.text_field :quantity, :onchange => 'return sum_row($(this));', :class => 'quantity'
-  %td
-    = f.text_field :discount, :onchange => 'return sum_row($(this));', :class => 'discount'
-  %td
-    = f.text_field :items_price, :onchange => 'return total($(this));', :class => 'items_price', :readonly => true
