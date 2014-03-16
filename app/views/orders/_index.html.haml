@@ -1,0 +1,23 @@
+%h1 Listing orders
+
+%table
+  %tr
+    %th Total price
+    %th Discount
+    %th Order date
+    %th Total weight
+    %th
+    %th
+
+  - @orders.each do |order|
+    %tr
+      %td= order.total_price
+      %td= order.discount
+      %td= order.order_date
+      %td= order.total_weight
+      %td= link_to 'Show', [order.customer, order]
+      %td= link_to 'Edit', edit_customer_order_path(order.customer, order)
+
+%br
+
+= link_to 'New Order', new_customer_order_path(@customer.id)

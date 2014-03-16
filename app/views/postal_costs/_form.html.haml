@@ -1,0 +1,19 @@
+= form_for @postal_cost do |f|
+  -if @postal_cost.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@postal_cost.errors.count, "error")} prohibited this postal_cost from being saved:"
+      %ul
+        - @postal_cost.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :code
+    = f.text_field :code
+  .field
+    = f.label :weight
+    = f.text_field :weight
+  .field
+    = f.label :cost
+    = f.text_field :cost
+  .actions
+    = f.submit 'Save'

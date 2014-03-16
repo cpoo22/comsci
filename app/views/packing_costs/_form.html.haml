@@ -1,0 +1,19 @@
+= form_for @packing_cost do |f|
+  -if @packing_cost.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@packing_cost.errors.count, "error")} prohibited this packing_cost from being saved:"
+      %ul
+        - @packing_cost.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :Code
+    = f.text_field :Code
+  .field
+    = f.label :Description
+    = f.text_field :Description
+  .field
+    = f.label :packing_cost
+    = f.text_field :packing_cost
+  .actions
+    = f.submit 'Save'

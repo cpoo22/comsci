@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @order = @customer.orders.build(params[:order])
     tidy_order @order
-    if !params[:preview_button] && @order.save
+    if params[:save_button] && @order.save
       redirect_to([@order.customer, @order], :notice => 'Order was successfully created.')
     else
       add_one_item
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
     @order = @customer.orders.find(params[:id])
     @order.assign_attributes(params[:order])
     tidy_order @order
-    if !params[:preview_button] && @order.update_attributes(params[:order])
+    if params[:save_button] && @order.update_attributes(params[:order])
       redirect_to([@order.customer, @order], :notice => 'Order was successfully updated.')
     else
       add_one_item

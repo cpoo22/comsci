@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @packing_cost.Code
+%p
+  %b Description:
+  = @packing_cost.Description
+%p
+  %b Packing cost:
+  = @packing_cost.packing_cost
+
+= link_to 'Edit', edit_packing_cost_path(@packing_cost)
+\|
+= link_to 'Back', packing_costs_path

@@ -1,6 +1,6 @@
 %tr
   %td
-    = f.text_field :product_code, :class => 'product'
+    = f.text_field :product_code, :class => 'product', :onchange => 'submit();'
   %td
     = f.text_field :product_name, :class => 'name', :readonly => true
     -#= f.collection_select(:product_name, Product.all, :id, :name, options ={:prompt => "-Select an item"}, html={:onchange => 'return submitFormWithAjax();'} )

@@ -1,0 +1,23 @@
+%h1 Listing packing_costs
+
+%table
+  %tr
+    %th Code
+    %th Description
+    %th Packing cost
+    %th
+    %th
+    %th
+
+  - @packing_costs.each do |packing_cost|
+    %tr
+      %td= packing_cost.Code
+      %td= packing_cost.Description
+      %td= packing_cost.packing_cost
+      %td= link_to 'Show', packing_cost
+      %td= link_to 'Edit', edit_packing_cost_path(packing_cost)
+      %td= link_to 'Destroy', packing_cost, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Packing cost', new_packing_cost_path

@@ -1,5 +1,9 @@
 Comsci::Application.routes.draw do
 
+  resources :postal_costs
+
+  resources :packing_costs
+
   resources :customers do
     resources :orders
   end

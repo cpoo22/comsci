@@ -1,0 +1,23 @@
+%h1 Listing postal_costs
+
+%table
+  %tr
+    %th Code
+    %th Weight
+    %th Cost
+    %th
+    %th
+    %th
+
+  - @postal_costs.each do |postal_cost|
+    %tr
+      %td= postal_cost.code
+      %td= postal_cost.weight
+      %td= postal_cost.cost
+      %td= link_to 'Show', postal_cost
+      %td= link_to 'Edit', edit_postal_cost_path(postal_cost)
+      %td= link_to 'Destroy', postal_cost, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Postal cost', new_postal_cost_path

@@ -2,12 +2,12 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.5'
 
-gem 'mysql2'
 gem 'formtastic'
 gem 'haml'
 gem 'haml-rails'
 gem 'jquery-rails'
 
+gem 'sqlite3'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -26,10 +26,7 @@ group :development, :test do
   gem 'rspec-mocks'
   gem 'rspec-rails'
   gem 'nifty-generators'
-  gem 'autotest-growl'
-  gem 'autotest-fsevent'
-  gem 'ZenTest', '~> 4.5'
-  gem "autotest-rails", "~> 4.1.0"
+
   gem 'nested_scaffold'
   gem 'factory_girl_rails'
 end
