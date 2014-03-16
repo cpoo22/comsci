@@ -9,11 +9,11 @@ class ReportController < ApplicationController
 
       r.add_field "TITLE", customer.title
       r.add_field "FIRST NAME", customer.first_name
-      r.add_field "SURNAME", customer.last_name
+      r.add_field "SURNAME", customer.surname
 
-      r.add_field "ADDRESS 1", customer.address_line_1
-      r.add_field "ADDRESS 2", customer.address_line_2
-      r.add_field "ADDRESS 3", customer.address_line_3
+      r.add_field "ADDRESS 1", customer.address_1
+      r.add_field "ADDRESS 2", customer.address_2
+      r.add_field "ADDRESS 3", customer.address_3
       r.add_field "TOWN", customer.town
       r.add_field "POST CODE", customer.postcode
       r.add_field "COUNTRY", customer.country

@@ -3,23 +3,23 @@
 %p
   %span.cust_label
     %strong Name:
-  = "#{@customer.title} #{@customer.first_name} #{@customer.last_name}"
+  = "#{@customer.title} #{@customer.first_name} #{@customer.surname}"
 %span.cust_label
   %strong Address:
 .address
-  %p= @customer.address_line_1 + ',' if @customer.address_line_1
-  %p= @customer.address_line_2 + ',' if @customer.address_line_2
-  %p= @customer.address_line_3 + ',' if @customer.address_line_3
+  %p= @customer.address_1 + ',' if @customer.address_1
+  %p= @customer.address_2 + ',' if @customer.address_2
+  %p= @customer.address_3 + ',' if @customer.address_3
   %p= @customer.town + ',' if @customer.town
   %p= @customer.county + ',' if @customer.county
   %p= @customer.country + '.' if @customer.country
   %p= @customer.postcode if @customer.postcode
 %p
   %strong Telephone Number:
-  = @customer.telephone_number
+  = @customer.daytel
 %p
-  %strong Mobile Number:
-  = @customer.mobile_number
+  %strong Home Number:
+  = @customer.hometel
 %p
   %strong Email:
   = @customer.email
