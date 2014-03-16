@@ -14,6 +14,9 @@ Comsci::Application.routes.draw do
 
   root :to => 'pages#index'
 
+  get 'invoice' => 'report#generate_invoice'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

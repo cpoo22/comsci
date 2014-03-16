@@ -14,3 +14,5 @@
 = link_to 'Edit', edit_customer_order_path(@order.customer, @order)
 \|
 = link_to 'Back', customer_orders_path(@order.customer)
+\|
+= link_to 'Get Invoice', "/invoice?order=#{@order.id}"

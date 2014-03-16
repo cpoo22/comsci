@@ -74,6 +74,10 @@ GEM
     nested_scaffold (0.2.1)
       rails (~> 3.2.2)
     nifty-generators (0.4.6)
+    nokogiri (1.5.11)
+    odf-report (0.4.4)
+      nokogiri (~> 1.5.0)
+      rubyzip (~> 0.9.4)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -114,6 +118,7 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.10.0)
+    rubyzip (0.9.9)
     sass (3.1.19)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -151,6 +156,7 @@ DEPENDENCIES
   mocha
   nested_scaffold
   nifty-generators
+  odf-report
   rails (= 3.2.5)
   rspec
   rspec-core

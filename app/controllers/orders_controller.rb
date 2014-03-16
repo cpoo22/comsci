@@ -65,4 +65,31 @@ class OrdersController < ApplicationController
     order.discount = 0
   end
 
+  def generate_invoice
+    report = ODFReport::Report.new("#{File.expand_path(File.dirname(__FILE__))}/../../templates/invoice.odt") do |r|
+
+      r.add_field "USER_NAME", 'me me'
+      r.add_field "ADDRESS", '2 sharon close'
+
+
+      o1 = OpenStruct.new(item: 'item1', cost: 'cost 1')
+      o2 = OpenStruct.new(item: 'item2', cost: 'cost 2')
+      h1 = {item: 'item 1', cost: 'cost 1'}
+      h2 = {item: 'item 2', cost: 'cost 2'}
+
+      @list_of_items = [h1, h2]
+
+      r.add_table("Items", @list_of_items, :header=>true) do |t|
+        t.add_column('ITEM', :item)
+        t.add_column('COST', :cost)
+      end
+
+
+    end
+
+    report_file_name = report.generate
+
+    send_file(report_file_name)
+  end
+
 end
