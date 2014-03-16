@@ -22,6 +22,8 @@ class ReportController < ApplicationController
       r.add_field "ORDER DATE", order.order_date
       r.add_field "GRAND TOTAL", order.total_price
       r.add_field "DISCOUNT", order.discount
+      r.add_field "POST GRD", order.postage_type
+      r.add_field "POSTAGE", order.postage
 
 
       r.add_table("Items", order.order_items, :header=>true) do |t|
